@@ -78,3 +78,46 @@ describe('Create Account on Magento Web', () =>{//Daftar akun melalui Websiate M
         cy.get(createAccount.err_msg_blankConPass).should('contain.text', 'This is a required field.')
     })
 })
+
+
+describe('Create Account Scenario', () => {
+  // Setiap sebelum eksekusi per test, visit website
+  beforeEach(() => {
+    cy.visit('https://magento.softwaretestingboard.com/customer/account/create/');
+  });
+
+  // Test scenario: Navigasi ke halaman Create Account
+  it('Navigasi ke halaman create account', () => {
+    cy.contains('Sign In').click();
+    cy.contains('Create an Account').click();
+    cy.url().should('include', '/customer/account/create/');
+  });
+
+  it('Menampilkan judul halaman yang sesuai', () => {
+    cy.title().should('include', 'Create New Customer Account');
+  });
+
+  // Test scenario: Membuat akun baru dengan weak password
+  it('Membuat akun baru dengan weak password', () => {
+    cy.get('#firstname').type('Ahmed');
+    cy.get('#lastname').type('Kemal');
+    cy.get('#email_address').type('kemala55@gmail.com');
+    cy.get('#password').type('1234'); // Weak password
+    cy.get('#password-confirmation').type('1234');
+    cy.get('[class="action submit primary"]').click();
+    cy.get('#password-error').should('contain', 'Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.');
+  });
+
+  // Test scenario: Membuat akun baru dengan strong password
+  it('Membuat akun baru dengan strong password', () => {
+    cy.get('#firstname').type('Dudung');
+    cy.get('#lastname').type('Solihin');
+    cy.get('#email_address').type('dudungesdudung55@gmail.com');
+    cy.get('#password').type('Dudungmakanesdudung123'); // Strong password
+    cy.get('#password-confirmation').type('Dudungmakanesdudung123');
+    cy.get('[class="action submit primary"]').click();
+    cy.url().should('include', '/customer/account/');
+    cy.get('.message-success').should('contain', 'Thank you for registering with Main Website Store.');
+  });
+
+});
