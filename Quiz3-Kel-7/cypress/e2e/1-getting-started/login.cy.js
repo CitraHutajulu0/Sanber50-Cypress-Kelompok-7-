@@ -7,7 +7,7 @@ describe('Login Test', () => {
         cy.get('#email').type('habibannajjar20@gmail.com')
         cy.get('#pass').type('Test12345')
         cy.get('#send2').click()
-        cy.get('#page-title-wrapper').should('contain','My Account')
+        cy.get('h1.page-title').should('contain', 'My Account')
     })
 
 })
