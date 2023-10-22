@@ -6,7 +6,6 @@ describe('Access Login Page', () => {
         // Di sini kita mengunjungi halaman login Magento dengan URL yang diberikan pada soal quis.
         // Kemudian, kita dapat melanjutkan dengan tindakan yang sesuai pada halaman ini.
         // Contoh lain, jika ingin memeriksa elemen berdasarkan teksnya:
-        cy.contains("Sign In or Create an Account")
     })
 
     it('Verify Login successfull', () => {
