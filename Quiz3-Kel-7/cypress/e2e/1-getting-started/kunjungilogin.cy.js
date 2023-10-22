@@ -1,4 +1,4 @@
-import createAccount from "../../support/pageObject/loginPage"
+import loginPage from "../../support/pageObject/loginPage"
 
 describe('Access Login Page', () => {
     it('visits the login page', () => {
